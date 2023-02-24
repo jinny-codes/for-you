@@ -37,4 +37,11 @@ public class CommentService {
         return commentRepository.findOne(commentId);
     }
 
+    @Transactional
+    public void setPrivate(Long commentId, boolean priv) {
+        Comment comment = commentRepository.findOne(commentId);
+        if (priv) comment.setCommentStatus(CommentStatus.PRIVATE);
+        else comment.setCommentStatus(CommentStatus.PUBLIC);
+    }
+
 }
