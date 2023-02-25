@@ -1,4 +1,4 @@
-package happyforyou.foryou.api;
+package happyforyou.foryou.controller;
 
 import happyforyou.foryou.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class CommentApiController {
+public class CommentController {
 
     private CommentRepository commentRepository;
 

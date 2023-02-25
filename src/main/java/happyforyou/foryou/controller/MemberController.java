@@ -1,4 +1,4 @@
-package happyforyou.foryou.api;
+package happyforyou.foryou.controller;
 
 import happyforyou.foryou.domain.Member;
 import happyforyou.foryou.service.MemberService;
@@ -8,12 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class MemberApiController {
+public class MemberController {
 
     private final MemberService memberService;
 

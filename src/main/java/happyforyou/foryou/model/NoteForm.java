@@ -1,4 +1,4 @@
-package happyforyou.foryou.controller;
+package happyforyou.foryou.model;
 
 import happyforyou.foryou.domain.Member;
 import lombok.Getter;
