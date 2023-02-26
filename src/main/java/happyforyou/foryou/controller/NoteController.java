@@ -1,6 +1,7 @@
 package happyforyou.foryou.controller;
 
 import happyforyou.foryou.domain.Note;
+import happyforyou.foryou.dto.CommentDto;
 import happyforyou.foryou.dto.NoteDto;
 import happyforyou.foryou.repository.NoteRepository;
 import happyforyou.foryou.service.NoteService;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -57,5 +60,19 @@ public class NoteController {
     public ResponseEntity<Long> deleteNote(@PathVariable(name = "id") Long id) {
         noteService.deleteNote(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    // 노트의 댓글 조회
+    @GetMapping("/{id}/comments")
+    public List<CommentDto> getCommentsByNote(@PathVariable Long id) {
+        Optional<Note> noteOptional = noteRepository.findById(id);
+        if (!noteOptional.isPresent()) {
+            throw new MissingResourceException("There is no such note.", "Note", id.toString());
+        }
+
+        return noteOptional.get().getComments().stream()
+                .map(comment -> modelMapper.map(comment, CommentDto.class))
+                .collect(Collectors.toList());
+
     }
 }

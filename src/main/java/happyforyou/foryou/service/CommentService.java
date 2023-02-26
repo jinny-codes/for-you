@@ -47,10 +47,9 @@ public class CommentService {
     }
 
     @Transactional
-    public void setPrivate(Long commentId, boolean priv) {
-        Comment comment = commentRepository.findOne(commentId);
-        if (priv) comment.setCommentStatus(CommentStatus.PRIVATE);
-        else comment.setCommentStatus(CommentStatus.PUBLIC);
+    public void deleteComment(Long id) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new MissingResourceException("The comment does not exist.", "Comment", id.toString()));
+        commentRepository.delete(comment);
     }
-
 }

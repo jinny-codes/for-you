@@ -81,7 +81,7 @@ public class MemberController {
 
     // 회원의 전체 노트 조회
     @GetMapping("/member/{id}/notes")
-    public List<NoteDto> getNotesByMember(Long id) {
+    public List<NoteDto> getNotesByMember(@PathVariable Long id) {
         Optional<Member> userOptional= memberRepository.findById(id);
         if(!userOptional.isPresent()) {
             throw new MissingResourceException("There is no such member.", "Member", id.toString());
