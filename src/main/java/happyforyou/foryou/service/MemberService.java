@@ -5,19 +5,28 @@ import happyforyou.foryou.domain.Note;
 import happyforyou.foryou.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberService implements UserDetailsService {
     @Autowired
     private final MemberRepository memberRepository;
+
+
 
     @Transactional
     public Member join(Member member) {
@@ -54,7 +63,7 @@ public class MemberService {
     public Member updateMember(Long memberId, Member memberRequest) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MissingResourceException("The member does not exist.", "Member", memberId.toString()));
-        member.setName(memberRequest.getName());
+        member.setUsername(memberRequest.getUsername());
         return memberRepository.save(member);
     }
 
@@ -64,5 +73,19 @@ public class MemberService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MissingResourceException("The note does not exist.", "Note", memberId.toString()));
         memberRepository.delete(member);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+        Member member = memberRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("Member not found with name or email: " + usernameOrEmail));
+        Set<GrantedAuthority> authorities = member
+                .getNotes()
+                .stream()
+                .map((note) -> new SimpleGrantedAuthority(note.getTitle())).collect(Collectors.toSet());
+
+        return new org.springframework.security.core.userdetails.User(member.getEmail(),
+                member.getPassword(),
+                authorities);
     }
 }

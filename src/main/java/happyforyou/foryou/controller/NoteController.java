@@ -3,7 +3,9 @@ package happyforyou.foryou.controller;
 import happyforyou.foryou.domain.Note;
 import happyforyou.foryou.dto.CommentDto;
 import happyforyou.foryou.dto.NoteDto;
+import happyforyou.foryou.repository.CommentRepository;
 import happyforyou.foryou.repository.NoteRepository;
+import happyforyou.foryou.service.CommentService;
 import happyforyou.foryou.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,11 +21,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/notes")
+@RequestMapping("/api/notes")
 public class NoteController {
 
-    private NoteRepository noteRepository;
-    private NoteService noteService;
+    private final NoteRepository noteRepository;
+    private final NoteService noteService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -39,7 +41,6 @@ public class NoteController {
     // 노트 등록
     @PostMapping
     public ResponseEntity<NoteDto> createPost(@RequestBody NoteDto noteDto) {
-
         Note noteRequest = modelMapper.map(noteDto, Note.class);
         Note note = noteService.createNote(noteRequest);
         NoteDto noteResponse = modelMapper.map(note, NoteDto.class);

@@ -4,12 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a684c037-82a5-48bc-bddc-942ca84637de" name="Changes" comment="">
+    <list default="true" id="a684c037-82a5-48bc-bddc-942ca84637de" name="Changes" comment="Revised comments">
+      <change afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/dto/LoginDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/dto/SignUpDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/model/MemberForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/members/signupForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/ForYouApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/ForYouApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/CommentApiController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/MemberApiController$CreateMemberRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/MemberApiController$CreateMemberResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/MemberApiController$MemberDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/MemberApiController$Result.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/MemberApiController$UpdateMemberRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/MemberApiController$UpdateMemberResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/MemberApiController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/api/NoteApiController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/controller/HomeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/domain/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/domain/Member.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/domain/Note.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/domain/Note.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/repository/CommentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/repository/CommentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/repository/MemberRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/repository/MemberRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/repository/NoteRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/repository/NoteRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/service/CommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/service/CommentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/service/MemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/service/MemberService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/service/NoteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/happyforyou/foryou/service/NoteService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/controller/MemberController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/controller/NoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/domain/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/domain/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/dto/MemberDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/repository/MemberRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/service/MemberService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/service/NoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/happyforyou/foryou/service/NoteService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +60,7 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -48,6 +82,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_opened_file_path": "/Users/jinny/Downloads/for-you/src/main/resources/static",
@@ -96,6 +131,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Revised comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revised comments" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

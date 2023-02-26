@@ -1,16 +1,14 @@
 package happyforyou.foryou.service;
 
 import happyforyou.foryou.domain.Comment;
-import happyforyou.foryou.domain.CommentStatus;
 import happyforyou.foryou.domain.Note;
 import happyforyou.foryou.repository.CommentRepository;
+import happyforyou.foryou.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.MissingResourceException;
 import java.util.Optional;
 
 @Service
@@ -19,16 +17,20 @@ import java.util.Optional;
 public class CommentService {
     @Autowired
     private final CommentRepository commentRepository;
+    private final NoteRepository noteRepository;
 
     @Transactional
-    public Comment createComment(Comment comment) {
+    public Comment createComment(Long id, Comment comment) {
+        Note note = noteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("The note does not exist."));
+        comment.setNote(note);
         return commentRepository.save(comment);
     }
 
     @Transactional
     public Comment updateComment(Long commentId, Comment commentRequest) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new MissingResourceException("The comment does not exist.", "Comment", commentId.toString()));
+                .orElseThrow(() -> new IllegalArgumentException("The note does not exist."));
         comment.setContent(commentRequest.getContent());
         comment.setCommentStatus(commentRequest.getCommentStatus());
         return commentRepository.save(comment);
@@ -43,13 +45,13 @@ public class CommentService {
     public Comment getCommentById(Long commentId) {
         Optional<Comment> result = commentRepository.findById(commentId);
         if (result.isPresent()) { return result.get(); }
-        else { throw new MissingResourceException("There is no such comment.", "Comment", commentId.toString()); }
+        else { throw new IllegalArgumentException("The comment does not exist."); }
     }
 
     @Transactional
     public void deleteComment(Long id) {
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new MissingResourceException("The comment does not exist.", "Comment", id.toString()));
+                .orElseThrow(() -> new IllegalArgumentException("The comment does not exist."));
         commentRepository.delete(comment);
     }
 }

@@ -1,6 +1,5 @@
 package happyforyou.foryou.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +16,13 @@ public class Member {
     @Column(name = "member_id", nullable = false)
     private Long id;
 
-    private String name;
+    private String username;
     private String email;
 
-    @OneToMany(mappedBy = "member")
+    private String password;
+
+    @OneToMany(mappedBy = "member", fetch = LAZY, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc")
     private List<Note> notes;
 
 }

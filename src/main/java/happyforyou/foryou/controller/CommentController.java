@@ -1,9 +1,11 @@
 package happyforyou.foryou.controller;
 
 import happyforyou.foryou.domain.Comment;
+import happyforyou.foryou.domain.Note;
 import happyforyou.foryou.dto.CommentDto;
 import happyforyou.foryou.repository.CommentRepository;
 import happyforyou.foryou.service.CommentService;
+import happyforyou.foryou.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,46 +15,41 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comments")
+@RequestMapping("/api")
 public class CommentController {
 
-    private CommentRepository commentRepository;
-    private CommentService commentService;
+    private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
     @Autowired
     private ModelMapper modelMapper;
 
     // 댓글 조회
-    @GetMapping("/{id}")
-    public ResponseEntity<CommentDto> getCommentById(@PathVariable(name = "id") Long id) {
-        Comment comment = commentService.getCommentById(id);
-        CommentDto commentResponse = modelMapper.map(comment, CommentDto.class);
-        return ResponseEntity.ok().body(commentResponse);
-    }
 
     // 댓글 등록
-    @PostMapping
-    public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto) {
+    @PostMapping("/notes/{id}/comments")
+    public ResponseEntity<CommentDto> createComment(@PathVariable(name = "id") Long id,
+                                                    @RequestBody CommentDto commentDto) {
         Comment commentRequest = modelMapper.map(commentDto, Comment.class);
-        Comment comment = commentService.createComment(commentRequest);
+        Comment comment = commentService.createComment(id, commentRequest);
         CommentDto commentResponse = modelMapper.map(comment, CommentDto.class);
         return new ResponseEntity<CommentDto>(commentResponse, HttpStatus.CREATED);
     }
 
     // 댓글 수정
-    @PutMapping("/{id}")
-    public ResponseEntity<CommentDto> updateComment(@PathVariable Long id, @RequestBody CommentDto commentDto) {
-        Comment commentRequst = modelMapper.map(commentDto, Comment.class);
-        Comment comment = commentService.updateComment(id, commentRequst);
+    @PutMapping("/notes/{noteId}/comments/{commentId}")
+    public ResponseEntity<CommentDto> updateComment(@PathVariable Long noteId, @PathVariable Long commentId, @RequestBody CommentDto commentDto) {
+        Comment commentRequest = modelMapper.map(commentDto, Comment.class);
+        Comment comment = commentService.updateComment(commentId, commentRequest);
         CommentDto commentResponse = modelMapper.map(comment, CommentDto.class);
         return ResponseEntity.ok().body(commentResponse);
     }
 
     // 댓글 삭제
-    @DeleteMapping("/{id}")
-    public  ResponseEntity<Long> deleteComment(@PathVariable(name = "id") Long id) {
-        commentService.deleteComment(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+    @DeleteMapping("/notes/{noteId}/comments/{commentId}")
+    public  ResponseEntity<Long> deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
+        return new ResponseEntity<>(commentId, HttpStatus.OK);
 
     }
 }

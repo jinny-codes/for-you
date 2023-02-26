@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,13 +24,21 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class MemberController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
     @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
+    // 회원 가입
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user", new Member());
+
+        return "signupForm";
+    }
 
     // 회원 조회
     @GetMapping("/members/{id}")

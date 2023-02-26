@@ -1,5 +1,6 @@
 package happyforyou.foryou.service;
 
+import happyforyou.foryou.domain.Comment;
 import happyforyou.foryou.domain.Note;
 import happyforyou.foryou.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class NoteService {
     @Transactional
     public Note updateNote(Long noteId, Note noteRequest) {
         Note note = noteRepository.findById(noteId)
-                .orElseThrow(() -> new MissingResourceException("The note does not exist.", "Note", noteId.toString()));
+                .orElseThrow(() -> new IllegalArgumentException("The note does not exist."));
         note.setTitle(noteRequest.getTitle());
         note.setDescription(noteRequest.getDescription());
         return noteRepository.save(note);
@@ -35,7 +36,7 @@ public class NoteService {
     @Transactional
     public void deleteNote(Long noteId) {
         Note note = noteRepository.findById(noteId)
-                .orElseThrow(() -> new MissingResourceException("The note does not exist.", "Note", noteId.toString()));
+                .orElseThrow(() -> new IllegalArgumentException("The note does not exist."));
         noteRepository.delete(note);
     }
 
@@ -46,7 +47,17 @@ public class NoteService {
     public Note getNoteById(Long noteId) {
         Optional<Note> result = noteRepository.findById(noteId);
         if (result.isPresent()) { return result.get(); }
-        else { throw new MissingResourceException("There is no such note.", "Note", noteId.toString()); }
+        else { throw new IllegalArgumentException("The note does not exist."); }
+    }
+
+    public List<Comment> getCommentsByNote(Long noteId) {
+        Optional<Note> result = noteRepository.findById(noteId);
+        if (result.isPresent()) {
+            return result.get().getComments();
+        }
+        else {
+            throw new IllegalArgumentException("The note does not exist.");
+        }
     }
 
 
