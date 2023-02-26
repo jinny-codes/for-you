@@ -25,6 +25,7 @@ public class NoteController {
     @Autowired
     private ModelMapper modelMapper;
 
+    // 노트 조회
     @GetMapping("/{id}")
     public ResponseEntity<NoteDto> getNoteById(@PathVariable(name = "id") Long id) {
         Note note = noteService.getNoteById(id);
