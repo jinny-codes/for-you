@@ -2,38 +2,48 @@ package happyforyou.foryou.service;
 
 import happyforyou.foryou.domain.Comment;
 import happyforyou.foryou.domain.CommentStatus;
+import happyforyou.foryou.domain.Note;
+import happyforyou.foryou.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CommentService {
     @Autowired
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
-    public void saveComment(Comment comment) {
-        commentRepository.save(comment);
+    public Comment createComment(Comment comment) {
+        return commentRepository.save(comment);
     }
 
     @Transactional
-    public void updateComment(Long commentId, String content, CommentStatus commentStatus) {
-        Comment comment = commentRepository.findOne(commentId);
-        comment.setContent(content);
-        comment.setCommentStatus(commentStatus);
+    public Comment updateComment(Long commentId, Comment commentRequest) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new MissingResourceException("The comment does not exist.", "Comment", commentId.toString()));
+        comment.setContent(commentRequest.getContent());
+        comment.setCommentStatus(commentRequest.getCommentStatus());
+        return commentRepository.save(comment);
     }
 
+    /*
     public List<Comment> findComments() {
         return commentRepository.findAll();
     }
+     */
 
-    public Comment findOne(Long commentId) {
-        return commentRepository.findOne(commentId);
+    public Comment getCommentById(Long commentId) {
+        Optional<Comment> result = commentRepository.findById(commentId);
+        if (result.isPresent()) { return result.get(); }
+        else { throw new MissingResourceException("There is no such comment.", "Comment", commentId.toString()); }
     }
 
     @Transactional

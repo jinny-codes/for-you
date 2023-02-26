@@ -1,6 +1,7 @@
 package happyforyou.foryou.controller;
 
 import happyforyou.foryou.domain.Member;
+import happyforyou.foryou.dto.CommentDto;
 import happyforyou.foryou.dto.MemberDto;
 import happyforyou.foryou.dto.NoteDto;
 import happyforyou.foryou.repository.MemberRepository;
@@ -91,4 +92,5 @@ public class MemberController {
                 .collect(Collectors.toList());
 
     }
+
 }

@@ -62,7 +62,7 @@ public class MemberService {
     @Transactional
     public void deleteMember(Long memberId) {
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new MissingResourceException("The note does not exist.", "Note", noteId.toString()));
+                .orElseThrow(() -> new MissingResourceException("The note does not exist.", "Note", memberId.toString()));
         memberRepository.delete(member);
     }
 }
