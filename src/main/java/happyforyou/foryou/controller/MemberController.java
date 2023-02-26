@@ -1,6 +1,7 @@
 package happyforyou.foryou.controller;
 
 import happyforyou.foryou.domain.Member;
+import happyforyou.foryou.dto.NoteDto;
 import happyforyou.foryou.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,12 +9,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     // 회원 등록
     @PostMapping("/members")
@@ -50,6 +54,20 @@ public class MemberController {
         return new Result(collect);
     }
      */
+
+    // 회원의 전체 노트 조회
+    @GetMapping("/member/{id}/notes")
+    public List<NoteDto> getNotesByMember(Long memberId) {
+        {
+            Optional<Member> userOptional= memberRepository.findById(id);
+            if(!userOptional.isPresent())
+            {
+                throw new UserNotFoundException("id: "+ id);
+            }
+            return userOptional.get().getPosts();
+        }
+    }
+
     @Data
     @AllArgsConstructor
     static class Result<T> {

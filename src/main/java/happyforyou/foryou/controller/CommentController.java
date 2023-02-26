@@ -1,6 +1,5 @@
 package happyforyou.foryou.controller;
 
-import happyforyou.foryou.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 

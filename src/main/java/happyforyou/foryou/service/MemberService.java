@@ -35,12 +35,6 @@ public class MemberService {
         }
     }
 
-    private void validateDuplicateEmail(String email) {
-        List<Member> findMembers = memberRepository.findByEmail(email);
-        if (!findMembers.isEmpty()) {
-            throw new IllegalStateException("이미 존재하는 이메일입니다.");
-        }
-    }
 
     public List<Member> findMembers() {
         return memberRepository.findAll();

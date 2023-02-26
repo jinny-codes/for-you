@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -17,23 +19,32 @@ public class NoteService {
     private final NoteRepository noteRepository;
 
     @Transactional
-    public void saveNote(Note note) {
-        noteRepository.save(note);
+    public Note createNote(Note note) {
+        return noteRepository.save(note);
     }
 
-
     @Transactional
-    public void updateNote(Long noteId, String title, String description) {
-        Note note = noteRepository.findOne(noteId);
-        note.setTitle(title);
-        note.setDescription(description);
+    public Note updateNote(Long noteId, Note noteRequest) {
+        Note note = noteRepository.findById(noteId)
+                .orElseThrow(() -> new MissingResourceException("The note does not exist.", "Note", noteId.toString()));
+        note.setTitle(noteRequest.getTitle());
+        note.setDescription(noteRequest.getDescription());
+        return noteRepository.save(note);
+    }
+
+    public void deleteNote(Long noteId) {
+        Note note = noteRepository.findById(noteId)
+                .orElseThrow(() -> new MissingResourceException("The note does not exist.", "Note", noteId.toString()));
+        noteRepository.delete(note);
     }
 
     public List<Note> findNotes() {
         return noteRepository.findAll();
     }
 
-    public Note findOne(Long noteId) {
-        return noteRepository.findOne(noteId);
+    public Note getNoteById(Long noteId) {
+        Optional<Note> result = noteRepository.findById(noteId);
+        if (result.isPresent()) { return result.get(); }
+        else { throw new MissingResourceException("There is no such note.", "Note", noteId.toString()); }
     }
 }

@@ -22,6 +22,7 @@ public class Note {
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "note_id")
     private Member member;

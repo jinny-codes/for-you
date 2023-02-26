@@ -20,7 +20,6 @@ public class Member {
     private String name;
     private String email;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<Note> notes;
 

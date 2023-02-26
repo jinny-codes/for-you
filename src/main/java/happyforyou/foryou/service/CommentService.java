@@ -2,7 +2,6 @@ package happyforyou.foryou.service;
 
 import happyforyou.foryou.domain.Comment;
 import happyforyou.foryou.domain.CommentStatus;
-import happyforyou.foryou.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
